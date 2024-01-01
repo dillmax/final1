@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
-// /* eslint-disable prettier/prettier */
-// import React from 'react';
-// import {AuthProvider} from './AuthProvider';
-// import Routes from './Routes';
+/* eslint-disable prettier/prettier */
+import React from 'react';
+import {AuthProvider} from './AuthProvider';
+import Routes from './Routes';
 
-// const Providers = () => {
-//   return (
-//     <AuthProvider>
-//       <Routes />
-//     </AuthProvider>
-//   );
-// };
+const Providers = () => {
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  );
+};
 
-// export default Providers;
+export default Providers;
