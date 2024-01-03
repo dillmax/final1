@@ -1,82 +1,83 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-unused-vars */
-/* eslint-disable prettier/prettier */
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+
 import Onboarding from 'react-native-onboarding-swiper';
-import {useNavigation} from '@react-navigation/native';
-import {setItem} from '../utils/asyncStorage';
 
-const {width, height} = Dimensions.get('window');
+const Dots = ({selected}) => {
+  let backgroundColor;
 
-export default function OnboardingScreen() {
-  const navigation = useNavigation();
+  backgroundColor = selected ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.3)';
 
-  const handleDone = () => {
-    navigation.navigate('Home');
-    setItem('onboarded', '1');
-  };
-
-  const doneButton = ({...props}) => {
-    return (
-      <TouchableOpacity style={styles.doneButton} {...props}>
-        <Text>Done</Text>
-      </TouchableOpacity>
-    );
-  };
   return (
-    <View style={styles.container}>
-      <Onboarding
-        onDone={handleDone}
-        onSkip={handleDone}
-        // bottomBarHighlight={false}
-        DoneButtonComponent={doneButton}
-        containerStyles={{paddingHorizontal: 15}}
-        pages={[
-          {
-            backgroundColor: '#a7f3d0',
-            image: <View style={styles.lottie}></View>,
-            title: 'Boost Productivity',
-            subtitle: 'Subscribe this channel to boost your productivity level',
-          },
-          {
-            backgroundColor: '#fef3c7',
-            image: <View style={styles.lottie}></View>,
-            title: 'Work Seamlessly',
-            subtitle: 'Get your work done seamlessly without interruption',
-          },
-          {
-            backgroundColor: '#a78bfa',
-            image: <View style={styles.lottie}></View>,
-            title: 'Achieve Higher Goals',
-            subtitle:
-              'By boosting your productivity we help you to achieve higher goals',
-          },
-        ]}
-      />
-    </View>
+    <View
+      style={{
+        width: 6,
+        height: 6,
+        marginHorizontal: 3,
+        backgroundColor,
+      }}
+    />
   );
-}
+};
 
+const Skip = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 10}} {...props}>
+    <Text style={{fontSize: 16}}>Skip</Text>
+  </TouchableOpacity>
+);
+const Next = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 10}} {...props}>
+    <Text style={{fontSize: 16}}>Next</Text>
+  </TouchableOpacity>
+);
+const Done = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 10}} {...props}>
+    <Text style={{fontSize: 16}}>Done</Text>
+  </TouchableOpacity>
+);
+
+const OnboardingScreen = ({navigation}) => {
+  return (
+    <Onboarding
+      SkipButtonComponent={Skip}
+      NextButtonComponent={Next}
+      DoneButtonComponent={Done}
+      DotComponent={Dots}
+      onSkip={() => navigation.replace('Login')}
+      onDone={() => navigation.navigate('Login')}
+      pages={[
+        {
+          backgroundColor: '#a6e4d0',
+          // image: <Image source={require('')} />,
+          title: 'Connect to the World',
+          subtitle: 'A New Way To Connect With The World',
+        },
+        {
+          backgroundColor: '#fdeb93',
+          // image: <Image source={require('')} />,
+          title: 'Share Your Favorites',
+          subtitle: 'Share Your Thoughts With Similar Kind of People',
+        },
+        {
+          backgroundColor: '#e9bcbe',
+          // image: <Image source={require('')} />,
+          title: 'Become The Star',
+          subtitle: 'Let The Spot Light Capture You',
+        },
+      ]}
+    />
+  );
+};
+
+export default OnboardingScreen;
+
+// eslint-disable-next-line no-unused-vars
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  lottie: {
-    width: width * 0.9,
-    height: width,
-  },
-  doneButton: {
-    padding: 20,
-    // backgroundColor: 'white',
-    // borderTopLeftRadius: '100%',
-    // borderBottomLeftRadius: '100%'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

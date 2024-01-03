@@ -4,7 +4,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   Platform,
   StyleSheet,
   ScrollView,
@@ -22,10 +21,10 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image
+      {/* <Image
         source={require('../assets/rn-social-logo.png')}
         style={styles.logo}
-      />
+      /> */}
       <Text style={styles.text}>Parttime Job App</Text>
       <FormInput
         labelValue={email}
@@ -75,7 +74,6 @@ const LoginScreen = ({navigation}) => {
     </ScrollView>
   );
 };
-
 
 export default LoginScreen;
 
